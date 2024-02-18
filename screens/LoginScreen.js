@@ -27,7 +27,7 @@ const LoginScreen = () => {
 
         if (token) {
           setTimeout(() => {
-            navigation.replace("Home");
+            navigation.replace("Main");
           }, 400);
         }
       } catch (error) {
@@ -49,7 +49,7 @@ const LoginScreen = () => {
         console.log(response);
         const token = response.data.token;
         AsyncStorage.setItem("authToken", token);
-        navigation.navigate("Home");
+        navigation.navigate("Main");
       })
       .catch((error) => {
         Alert.alert("Login error");
@@ -105,6 +105,7 @@ const LoginScreen = () => {
                 fontSize: email ? 16 : 16,
               }}
               placeholder="enter your Email"
+              autoCapitalize="none"
             />
           </View>
 

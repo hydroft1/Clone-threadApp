@@ -9,7 +9,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Entypo } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import ThreadsScreen from "./screens/ThreadsScreen";
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons } from "@expo/vector-icons";
 import ActivityScreen from "./screens/ActivityScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 
@@ -28,9 +28,9 @@ const StackNavigator = () => {
             headerShown: false,
             tabBarIcon: ({ focused }) =>
               focused ? (
-                <Entypo name="home" size={24} color="black" />
+                <Ionicons name="home" size={24} color="black" />
               ) : (
-                <AntDesign name="home" size={24} color="black" />
+                <Ionicons name="home-outline" size={24} color="black" />
               ),
           }}
         />
@@ -55,7 +55,7 @@ const StackNavigator = () => {
           name="Activity"
           component={ActivityScreen}
           options={{
-            tabBarLabel: "HoActivity",
+            tabBarLabel: "Activity",
             tabBarLabelStyle: { color: "black" },
             headerShown: false,
             tabBarIcon: ({ focused }) =>
@@ -71,18 +71,17 @@ const StackNavigator = () => {
           name="Profile"
           component={ProfileScreen}
           options={{
-            tabBarLabel: "HoActivity",
+            tabBarLabel: "Profile",
             tabBarLabelStyle: { color: "black" },
             headerShown: false,
             tabBarIcon: ({ focused }) =>
               focused ? (
-                <AntDesign name="heart" size={24} color="black" />
+                <Ionicons name="person" size={24} color="black" />
               ) : (
-                <AntDesign name="hearto" size={24} color="black" />
+                <Ionicons name="person-outline" size={24} color="black" />
               ),
           }}
         />
-
       </Tab.Navigator>
     );
   }
@@ -100,8 +99,8 @@ const StackNavigator = () => {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="Home"
-          component={HomeScreen}
+          name="Main"
+          component={BottomTabs}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

@@ -130,6 +130,7 @@ const RegisterScreen = () => {
                 fontSize: email ? 16 : 16,
               }}
               placeholder="enter your Email"
+              autoCapitalize="none"
             />
           </View>
 
@@ -163,6 +164,7 @@ const RegisterScreen = () => {
                   fontSize: password ? 16 : 16,
                 }}
                 placeholder="enter your Password"
+                autoCapitalize="none"
               />
             </View>
           </View>

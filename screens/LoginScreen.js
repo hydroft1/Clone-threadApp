@@ -9,7 +9,7 @@ import {
   Pressable,
   Alert,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
@@ -20,6 +20,23 @@ const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigation = useNavigation();
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      try {
+        const token = await AsyncStorage.getItem("authToken");
+
+        if (token) {
+          setTimeout(() => {
+            navigation.replace("Main");
+          }, 400);
+        }
+      } catch (error) {
+        console.log("error", error);
+      }
+    };
+
+    checkLoginStatus();
+  }, []);
   const handleLogin = () => {
     const user = {
       email: email,
@@ -32,11 +49,11 @@ const LoginScreen = () => {
         console.log(response);
         const token = response.data.token;
         AsyncStorage.setItem("authToken", token);
-        navigation.navigate("Home");
+        navigation.navigate("Main");
       })
       .catch((error) => {
-        Alert.alert("login error");
-        console.log("error", error);
+        Alert.alert("Login error");
+        console.log("error ", error);
       });
   };
   return (
@@ -45,7 +62,7 @@ const LoginScreen = () => {
     >
       <View style={{ marginTop: 50 }}>
         <Image
-          style={{ width: 150, height: 100, reziseMode: "contain" }}
+          style={{ width: 150, height: 100, resizeMode: "contain" }}
           source={{
             uri: "https://freelogopng.com/images/all_img/1688663386threads-logo-transparent.png",
           }}
@@ -55,7 +72,7 @@ const LoginScreen = () => {
       <KeyboardAvoidingView>
         <View style={{ alignItems: "center", justifyContent: "center" }}>
           <Text style={{ fontSize: 17, fontWeight: "bold", marginTop: 25 }}>
-            Login to your account
+            Login to Your Account
           </Text>
         </View>
 
@@ -72,14 +89,14 @@ const LoginScreen = () => {
             }}
           >
             <MaterialIcons
-              value={email}
-              onChangeText={(text) => setEmail(text)}
               style={{ marginLeft: 8 }}
               name="email"
               size={24}
               color="gray"
             />
             <TextInput
+              value={email}
+              onChangeText={(text) => setEmail(text)}
               placeholderTextColor={"gray"}
               style={{
                 color: "gray",
@@ -87,7 +104,7 @@ const LoginScreen = () => {
                 width: 300,
                 fontSize: email ? 16 : 16,
               }}
-              placeholder="enter your email"
+              placeholder="enter your Email"
             />
           </View>
 
@@ -165,6 +182,7 @@ const LoginScreen = () => {
             Login
           </Text>
         </Pressable>
+
         <Pressable
           onPress={() => navigation.navigate("Register")}
           style={{ marginTop: 10 }}

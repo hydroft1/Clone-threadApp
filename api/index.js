@@ -106,9 +106,16 @@ app.get("/verify/:token", async (req, res) => {
     res.status(200).json({ message: "Email verified sucessfully" });
   } catch (error) {
     console.log("error getting token", error);
-    response.status(500).json({ message: "Email verification failed" });
+    res.status(500).json({ message: "Email verification failed" });
   }
 });
+
+const generateSecretKey = () => {
+  const secretKey = crypto.randomBytes(32).toString("hex");
+  return secretKey;
+};
+
+const secretKey = generateSecretKey();
 
 app.post("/login", async (req, res) => {
   try {
@@ -124,8 +131,8 @@ app.post("/login", async (req, res) => {
 
     const token = jwt.sign({ userId: user._id }, secretKey);
 
-    response.status(200).json({ token });
+    res.status(200).json({ token });
   } catch (error) {
-    response.status(500).json({ message: "Login failed" });
+    res.status(500).json({ message: "Login failed" });
   }
 });

@@ -27,7 +27,7 @@ const LoginScreen = () => {
 
         if (token) {
           setTimeout(() => {
-            navigation.replace("Main");
+            navigation.replace("Home");
           }, 400);
         }
       } catch (error) {
@@ -49,11 +49,11 @@ const LoginScreen = () => {
         console.log(response);
         const token = response.data.token;
         AsyncStorage.setItem("authToken", token);
-        navigation.navigate("Main");
+        navigation.navigate("Home");
       })
       .catch((error) => {
         Alert.alert("Login error");
-        console.log("error ", error);
+        console.log("error login screen ", error);
       });
   };
   return (
